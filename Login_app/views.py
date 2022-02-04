@@ -9,6 +9,8 @@ from Login_app.forms import UserForm, UserInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from Login_app.models import UserInfo
+from django.contrib.auth.models import User
 
 def login_page(request):
     return render(request, 'Login_app/login.html', context={})
@@ -39,8 +41,17 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('Login_app:index'))          
 
 def index(request):
+    dict={}
+
+    if request.user.is_authenticated:
+        current_user = request.user
+        user_id = current_user.id
+        user_basic_info = User.objects.get(pk=user_id)
+        user_more_info = UserInfo.objects.get(user__pk=user_id)
+
     dict = {
-        
+        "user_basic_info" :user_basic_info,
+        "user_more_info" : user_more_info
     }
     return render(request, "Login_app/index.html", context=dict)
 

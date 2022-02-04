@@ -19,7 +19,7 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Home</a>
           </li>
-          {% if user.is_authentic %}
+          {% if user.is_authenticated %}
           <li class="nav-item active">
             <a class="nav-link" href="{% url "Login_app:logout" %}">Logout</a>
           </li>
