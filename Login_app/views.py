@@ -50,8 +50,8 @@ def index(request):
         user_more_info = UserInfo.objects.get(user__pk=user_id)
 
     dict = {
-        "user_basic_info" :user_basic_info,
-        "user_more_info" : user_more_info
+        # "user_basic_info" :user_basic_info,
+        # "user_more_info" : user_more_info
     }
     return render(request, "Login_app/index.html", context=dict)
 
